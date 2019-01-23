@@ -12,7 +12,7 @@ import systemzapisowy.Factory;
  *
  * @author adrianna
  */
-public class Student {
+public class Student extends User {
     private String indexNumber;
     private String fieldOfStudy;
     private String password;

@@ -10,7 +10,7 @@ import java.sql.*;
  *
  * @author adrianna
  */
-public class ConnectionManager {
+public class ConnectionMeneger {
     static String url = "jdbc:mysql://localhost:3306/jsos3";
     static String driverName = "com.mysql.jdbc.Driver";   
     static String username = "root";
@@ -33,6 +33,18 @@ public class ConnectionManager {
         }
         return con;
     }
+      
+      public static void closeConnection() {
+           if(con !=null){
+    
+         try{
+               con.close();
+            }
+            catch(Exception e){}
+        
+        
+    }
+      }
 
 
 }

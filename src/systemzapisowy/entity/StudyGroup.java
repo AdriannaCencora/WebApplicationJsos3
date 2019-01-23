@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package systemzapisowy.entity;
-import databaseAccess.ConnectionManager;
+import databaseAccess.ConnectionMeneger;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -33,7 +33,7 @@ public class StudyGroup {
     
     public StudyGroup() {
         enrollment = new ArrayList();
-        con = ConnectionManager.getConnection();
+        con = ConnectionMeneger.getConnection();
     }
     
     public String getGroupCode() {

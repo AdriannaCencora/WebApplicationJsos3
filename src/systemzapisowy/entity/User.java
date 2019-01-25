@@ -10,9 +10,9 @@ package systemzapisowy.entity;
  * @author adrianna
  */
 public class User {
-        private String name;
-    private String surname;
-    private String PESEL;
+        protected String name;
+    protected String surname;
+    protected String birthDate;
     private String type;
 
     public String getName() {
@@ -31,12 +31,12 @@ public class User {
         this.surname = surname;
     }
 
-    public String getPESEL() {
-        return PESEL;
+    public String getBirthDate() {
+        return birthDate;
     }
 
-    public void setPESEL(String PESEL) {
-        this.PESEL = PESEL;
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
     }
 
     public String getType() {

@@ -15,7 +15,7 @@ import systemzapisowy.Factory;
 public class Student extends User {
     private String indexNumber;
     private String fieldOfStudy;
-    private String password;
+    private String semester;
     private ArrayList<Enrollment> enrollments;
 
     public Student() {
@@ -38,12 +38,12 @@ public class Student extends User {
         this.fieldOfStudy = fieldOfStudy;
     }
 
-    public String getPassword() {
-        return password;
+    public String getSemester() {
+        return semester;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setSemester(String semester) {
+        this.semester = semester;
     }
 
     public ArrayList<Enrollment> getEnrollments() {
@@ -113,5 +113,16 @@ public class Student extends User {
         if(((Student)obj).getIndexNumber().equals(getIndexNumber()))
             return true;
         return false;        
+}
+    
+    
+    @Override
+    public String toString(){
+        return "Imie: " + name +
+                ", Nazwisko: " + surname + 
+                ", PESEL: " + birthDate + 
+                ", Numer Indeksu: " + indexNumber + 
+                ", Semester: " + semester + 
+                ", Kierunek: " + fieldOfStudy;                  
 }
 }

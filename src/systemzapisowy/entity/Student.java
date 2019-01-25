@@ -119,6 +119,7 @@ public class Student extends User {
     @Override
     public String toString(){
         return "Imie: " + name +
+                ", ID: " + ID +
                 ", Nazwisko: " + surname + 
                 ", PESEL: " + birthDate + 
                 ", Numer Indeksu: " + indexNumber + 

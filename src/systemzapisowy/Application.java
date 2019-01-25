@@ -67,10 +67,39 @@ public String addUser(String[] data) {
     }
     
     
-public String addUserToDatabase (String[] data) {
+public void addUserToDatabase (User user) {
+      System.out.println(user.toString());
     
+            try {
+            ps  = conn.prepareStatement("INSERT INTO Users"
+                    + " VALUES (?, ?, ?, ?)");
+            ps.setInt(1, Integer.parseInt(user.getID()));
+            ps.setString(2, user.getName());
+            ps.setString(3, user.getSurname());
+            
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            Date parsed = null;
+            try {
+                System.out.println(user.getBirthDate());
+                   parsed = format.parse(user.getBirthDate());
+            }  catch (ParseException e1) {
+                        e1.printStackTrace();
+            }
+            java.sql.Date sql = new java.sql.Date(parsed.getTime());
+            ps.setDate(4, sql);
+            
+            ps.executeUpdate();
+            ps.close();
+            }
+            catch (SQLException ex) {
+
+        ex.printStackTrace();
+
+    }
+
     
 }
+
     
     
     
@@ -82,9 +111,9 @@ public String addStudent(String[] data) {
         Student foundStudent = findStudent(student);
         if (foundStudent == null) {
          
-            addStudentToDatabase(student);
+          addStudentToDatabase(student);
 
-           // String info = student.toString();
+            String info = student.toString();
             return null;
         }
         return null;
@@ -96,11 +125,11 @@ public void addStudentToDatabase(Student student) {
         System.out.println(student.toString());
     
             try {
-            ps  = conn.prepareStatement("INSERT INTO Users (firstName, lastName, birthDate)"
-                    + " VALUES (?, ?, ?)");
-                       
-            ps.setString(1, student.getName());
-            ps.setString(2, student.getSurname());
+            ps  = conn.prepareStatement("INSERT INTO Users "
+                    + " VALUES (?, ?, ?, ?)");
+            ps.setInt(1, Integer.parseInt(student.getID()));
+            ps.setString(2, student.getName());
+            ps.setString(3, student.getSurname());
             
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             Date parsed = null;
@@ -111,7 +140,7 @@ public void addStudentToDatabase(Student student) {
                         e1.printStackTrace();
             }
             java.sql.Date sql = new java.sql.Date(parsed.getTime());
-            ps.setDate(3, sql);
+            ps.setDate(4, sql);
             
             ps.executeUpdate();
             ps.close();
@@ -120,12 +149,15 @@ public void addStudentToDatabase(Student student) {
              ps  = conn.prepareStatement("INSERT INTO Students  VALUES (?, ?, ?, ?)");
              ps.setInt(1, Integer.parseInt(student.getIndexNumber()));
              
-             String query1 = "SELECT userID from Users where= '" + student. + "' ";
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(query1);
+             String query1 = "SELECT userID from Users where userID = '" + student.getID() + "' ";
+             stmt = null;
+             stmt = conn.createStatement();
+             
+             rs = null;
+             rs = stmt.executeQuery(query1);
              
             if (rs.next()) {
-                ps.setString(3, rs.getString("fieldID") );
+                ps.setString(2, rs.getString("userID") );
             }
              
              
@@ -147,9 +179,67 @@ public void addStudentToDatabase(Student student) {
         ex.printStackTrace();
 
     }
-    
-    
 }
+    
+
+            
+            
+            
+//            public boolean deleteUser(int userID) {
+//       
+//        try {
+//            Statement stmt = conn.createStatement();
+//            int i = stmt.executeUpdate("DELETE FROM user WHERE userID=" + userID);
+//            if(i == 1) {
+//                return true;
+//            }
+//        } catch (SQLException ex) {
+//            ex.printStackTrace();
+//        }
+//            return false;
+//      }
+    
+    public boolean removeStudentFromDatabase(int studentID) {
+       
+        try {
+            Statement stmt = conn.createStatement();
+
+            String query = "SELECT userID FROM Students WHERE indexNum = " + studentID;
+            
+                         ResultSet rs = stmt.executeQuery(query);
+
+            
+            int i = stmt.executeUpdate("DELETE FROM Students WHERE indexNum = " + studentID);
+            if(i == 1) {
+                try {
+                Statement stmt2 = conn.createStatement();
+                if (rs.next()) {
+                int j = stmt2.executeUpdate("DELETE FROM Users WHERE userID = " + rs.getInt("userID"));
+                }
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+                  return true; 
+            }
+            
+            
+                
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+            return false;
+      }
+            
+            
+            
+
+            
+            
+            
+            
+            
+            
+            
 
     public String addGroup(String[] data, Course course) {
         StudyGroup studyGroup = course.addGroup(data);
@@ -202,9 +292,14 @@ public void addStudentToDatabase(Student student) {
         return null;
     }
 
-    public void removeStudent(String indexNumber) {
+    public void removeStudent(int indexNumber) {
         // TODO - implement Aplikacja.usunStudenta
-        throw new UnsupportedOperationException();
+        if(removeStudentFromDatabase(indexNumber)) {
+            System.out.println("Removing succed.");
+        }
+        else 
+            System.out.println("Removing succed.");
+
     }
     
     
@@ -250,11 +345,14 @@ public void addStudentToDatabase(Student student) {
     Factory factory = new Factory();
     
     
-        String[] daneStudenta1 = { "Mariusz", "Pudzianowski", "1997-05-05", "238366", "Informatyka", "4"};
+        //String[] daneUsera1 = {"111226", "Gal", "Anonim", "2001-05-05"}; 
+        String[] daneStudenta1 = {"100101", "Adrianna", "Cencora", "1995-05-05", "218403", "Informatyka", "5"};
         String[] daneKursu1 = {"HHH234", "Inżynieria Oprogramowania", "Laboratorium", "Informatyka", "5"};
         String[] daneGrupy1 = {"BBB123", "mgr. inż. Adam Małysz", "25", "15", "Środa"};
 
-    //    app.addStudent(daneStudenta1);
+        //app.addStudent(daneStudenta1);
+
+       app.removeStudent(218403);
 //        System.out.println(app.addCourse(daneKursu1));
 //        System.out.println(app.addGroup(daneGrupy1, app.courses.get(0)));
 //

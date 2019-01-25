@@ -68,18 +68,19 @@ public class Factory {
             return null;
         }
         Student student = new Student();
-        student.setName(data[0]);
-        student.setSurname(data[1]);
+        student.setID(data[0]);
+        student.setName(data[1]);
+        student.setSurname(data[2]);
 
 //        if (data[2].length() != 8) {
 //            throw new IllegalFormatCodePointException(2);
 //        } else {
 //            
 //        }
-        student.setBirthDate(data[2]);
-        student.setIndexNumber(data[3]);
-        student.setFieldOfStudy(data[4]);
-        student.setSemester(data[5]);
+        student.setBirthDate(data[3]);
+        student.setIndexNumber(data[4]);
+        student.setFieldOfStudy(data[5]);
+        student.setSemester(data[6]);
 
         return student;
 
@@ -87,10 +88,12 @@ public class Factory {
 
     
     public User  createUser(String[] data) {
-        Student user = new Student();
-        user.setName(data[0]);
-        user.setSurname(data[1]);
-        
+        User user = new User();
+        user.setID(data[0]);
+        user.setName(data[1]);
+        user.setSurname(data[2]);
+        user.setBirthDate(data[3]);
+
         return user;
     }
     

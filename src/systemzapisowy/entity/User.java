@@ -10,7 +10,8 @@ package systemzapisowy.entity;
  * @author adrianna
  */
 public class User {
-        protected String name;
+    protected String ID;
+    protected String name;
     protected String surname;
     protected String birthDate;
     private String type;
@@ -45,5 +46,13 @@ public class User {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
     }
 }

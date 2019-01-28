@@ -122,4 +122,13 @@ public class Course {
         System.out.println("Usunięto grupę!");
 }
     
+    
+      @Override
+    public String toString(){
+        return "Nazwa: " + name +
+                ", ID: " + courseCode +
+                ", Semester: " + semester + 
+                ", Kierunek: " + fieldOfStudy;
+    
+}
 }

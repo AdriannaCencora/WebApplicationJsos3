@@ -55,14 +55,14 @@ public class Student extends User {
     }
     
     
-    public boolean checkTerm(String day, int hour) {
-        for (int i = 0; i < enrollments.size(); i++) {
-            if (enrollments.get(i).getStudyGroup().getHour() == hour && enrollments.get(i).getStudyGroup().getDay().equals(day)) {
-                return false;
-            }
-        }
-        return true;
-    }
+//    public boolean checkTerm(String day, int hour) {
+//        for (int i = 0; i < enrollments.size(); i++) {
+//            if (enrollments.get(i).getStudyGroup().getHour() == hour && enrollments.get(i).getStudyGroup().getDay().equals(day)) {
+//                return false;
+//            }
+//        }
+//        return true;
+//    }
 
     void removeGroup(String groupCode) {
         for (int i = 0; i < enrollments.size(); i++) {
@@ -93,16 +93,16 @@ public class Student extends User {
         return true;
     }
 
-    boolean enrollToGroup(StudyGroup group) {
-        if(checkRightToEnroll(group) && checkTerm(group.getDay(), group.getHour())){
-            Factory factory = new Factory();
-            Enrollment enrollment = factory.createEnrollment(this, group);
-            addEnrollmentToList(enrollment);
-            return true;
-        }
-        return false;
-}
-    
+//    boolean enrollToGroup(StudyGroup group) {
+//        if(checkRightToEnroll(group) && checkTerm(group.getDay(), group.getHour())){
+//            Factory factory = new Factory();
+//            Enrollment enrollment = factory.createEnrollment(this, group);
+//            addEnrollmentToList(enrollment);
+//            return true;
+//        }
+//        return false;
+//}
+//    
       public boolean writeOutStudent(Student student){
         //TODO
         return false;

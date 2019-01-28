@@ -23,8 +23,9 @@ public class StudyGroup {
     private String lecturer;
     private int maxNumberOfPlaces;
     private Course course;
-    private int hour;
+    private String hour;
     private String day;
+    private String typeOfClass;
     private ArrayList<Enrollment> enrollment;
 
     private static Connection con = null;
@@ -76,11 +77,11 @@ public class StudyGroup {
         this.course = course;
     }
 
-    public int getHour() {
+    public String getHour() {
         return hour;
     }
 
-    public void setHour(int hour) {
+    public void setHour(String hour) {
         this.hour = hour;
     }
 
@@ -124,9 +125,9 @@ public class StudyGroup {
     
     
       public boolean enrollStudent(Student student) {
-        if (!checkPlaces() || !student.enrollToGroup(this)) {
-            return false;
-        }
+//        if (!checkPlaces() || !student.enrollToGroup(this)) {
+//            return false;
+//        }
         Factory factory = new Factory();
         Enrollment enroll = factory.createEnrollment(student, this);
         addEnrollmentToList(enroll);
@@ -146,6 +147,23 @@ public class StudyGroup {
             enrollment.add(enroll);
         }
 }
+
+    public String getTypeOfClass() {
+        return typeOfClass;
+    }
+
+    public void setTypeOfClass(String typeOfClass) {
+        this.typeOfClass = typeOfClass;
+    }
    
-    
+          @Override
+    public String toString(){
+        return "Nazwa: " + groupCode +
+                ", currentNumberOfOccupiedPlaces: " + currentNumberOfOccupiedPlaces +
+                ", max: " + maxNumberOfPlaces +
+                ", typeOfClass: " + typeOfClass +
+                ", lecturer: " + lecturer +
+                ", hour: " + hour + 
+                ", day: " + day;
+}
 }

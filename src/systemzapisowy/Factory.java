@@ -20,50 +20,6 @@ public class Factory {
 
     
     public Student createStudent(String[] data) throws IllegalFormatCodePointException {
-//        
-//        try {
-//            ps  = connection.prepareStatement("INSERT INTO Users (firstName, lastName, birthDate)"
-//                    + " VALUES (?, ?, ?)");
-//                       
-//            ps.setString(1, data[0]);
-//            ps.setString(2, data[1]);
-//            
-//            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-//            Date parsed = null;
-//            try {
-//                   parsed = format.parse(data[2]);
-//            }  catch (ParseException e1) {
-//                        e1.printStackTrace();
-//            }
-//            java.sql.Date sql = new java.sql.Date(parsed.getTime());
-//            ps.setDate(3, sql);
-//            
-//            ps.executeUpdate();
-//            ps.close();
-
-//                       
-//             ps  = connection.prepareStatement("INSERT INTO Students (indexNum, fieldOfStudyTest, semester) VALUES (?, ?, ?)");
-//             ps.setInt(1, Integer.parseInt(data[3]));
-//             
-//             String query = "SELECT fieldID from FieldsOfStudy WHERE fieldName= '" + data[4] + "' ";
-//             Statement stmt = connection.createStatement();
-//             ResultSet rs = stmt.executeQuery(query);
-//             
-//            if (rs.next()) {
-//                ps.setString(2, rs.getString("fieldID") );
-//            }
-//             ps.setInt(3, Integer.parseInt(data[5]));
-//
-//             ps.executeUpdate();
-//             ps.close();
-//             
-//        } catch (SQLException ex) {
-//
-//        ex.printStackTrace();
-
- //   }
-        
-        
         if (data == null) {
             return null;
         }
@@ -72,11 +28,6 @@ public class Factory {
         student.setName(data[1]);
         student.setSurname(data[2]);
 
-//        if (data[2].length() != 8) {
-//            throw new IllegalFormatCodePointException(2);
-//        } else {
-//            
-//        }
         student.setBirthDate(data[3]);
         student.setIndexNumber(data[4]);
         student.setFieldOfStudy(data[5]);
@@ -85,7 +36,6 @@ public class Factory {
         return student;
 
     }
-
     
     public User  createUser(String[] data) {
         User user = new User();
@@ -113,7 +63,7 @@ public class Factory {
         group.setGroupCode(data[0]);
         group.setLecturer(data[1]);
         group.setMaxNumberOfPlaces(Integer.parseInt(data[2]));
-        group.setHour(Integer.parseInt(data[3]));
+        group.setHour(data[3]);
         group.setDay(data[4]);
         return group;
     }

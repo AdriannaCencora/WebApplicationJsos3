@@ -162,7 +162,6 @@ public boolean addStudentToDatabase(Student student) {
             String queryToSelect = "SELECT userID FROM Students WHERE indexNum = " + studentIndex;
             rs = stmt1.executeQuery(queryToSelect);
 
-            //Removing student from groupRecords table.
             int k = stmt.executeUpdate("DELETE FROM GroupRecords WHERE studentIndex = " + studentIndex );
                 
             int i = stmt.executeUpdate("DELETE FROM Students WHERE indexNum = " + studentIndex);
@@ -354,6 +353,55 @@ public StudyGroup findGroupByCode(String groupCode) {
      return false;
  }
  
+   
+    public void leaveGroup(String groupCode, String indexNumber, String courseCode) {
+
+        Student student = findStudentByIndex(indexNumber);
+
+        if (student == null) {
+            System.out.println("Student does not exist in base!");
+            return;
+        }
+
+        Course course = findCourseByCode(courseCode);
+
+        if (course == null) {
+            System.out.println("Course not found!");
+            return;
+        }
+        
+        StudyGroup group = findGroupByCode(groupCode);
+
+        if (group == null) {
+            System.out.println("Group not found!");
+            return;
+        }
+
+        if (removeEnrollmentFromDatabase(student)) {
+            System.out.println("Nie udało się wypisac z zajęc!");
+            return;
+        }
+        System.out.println("Wypisano!");
+}
+    
+  public boolean removeEnrollmentFromDatabase (Student student) {
+
+       try {       
+         int k = stmt.executeUpdate("DELETE FROM GroupRecords WHERE studentIndex = " + student.getIndexNumber());
+         
+         if (k == 1) 
+            return true;
+            
+     } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+      
+    return false;
+  }
+ 
+ 
+ 
+ 
     public static void main (String[] args) {
         
     conn = ConnectionMeneger.getConnection();
@@ -371,9 +419,10 @@ public StudyGroup findGroupByCode(String groupCode) {
    //Course course = app.findCourseByCode("A12345");
      //   System.out.println(course.toString());
         
-          StudyGroup group = app.findGroupByCode("E12345");
-        System.out.println(group.toString());
-            app.enrollStudent("E12345", "218403", "A22223");
+    //      StudyGroup group = app.findGroupByCode("E12345");
+   //     System.out.println(group.toString());
+   //         app.enrollStudent("E12345", "218403", "A22223");
+            app.leaveGroup("E12345", "218403", "A22223");
   //  Student student = app.findStudentByIndex("232988");
     
    // System.out.println(student.toString());
